@@ -1,6 +1,6 @@
-# space_time
+# :dizzy: :alien: :rocket: space_time :dizzy: :alien: :rocket:
 
-SpaceX rocket launch times viewer
+SpaceX rocket launch times viewer by Ben Butterworth.
 
 ### To install
 - Android: `cd space_time`, Plug in a device with debug mode or run emulator, followed by `adb install public/SpaceTime.apk`
@@ -33,6 +33,11 @@ See `/images/ios` and `images/android` for more images.
 
 ### Resources & licenses
 - Digital-7 font used for countdown was taken from https://www.dafont.com/digital-7.font - free for personal use
+
+### Oops
+There are no tests. I got too engrossed in trying out different flutter features. Perhaps my private repo https://github.com/ben-xD/SpaceTime will have the tests? :sparkles: :poop:
+
+# Readme from gohenry :speech_balloon:
 
 ### Objective
 
