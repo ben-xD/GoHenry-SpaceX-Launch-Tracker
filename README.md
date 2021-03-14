@@ -2,6 +2,14 @@
 
 SpaceX rocket launch times viewer
 
+### My solution
+- I found that the SpaceX Upcoming Launches API gave launch dates to varying precision (accurate to 1 month, accurate to 1 year, etc), so I handled date precision: some dates are "relative" (e.g. in a day) when they are more precise, but others are months/ years (e.g. May) when they are less precise. 
+- I initially implemented the header (Launch`, `date/ UTC`), but realized the content speaks for itself once the dates are provided in a human friendly format.
+- I don't use `const Widget` because I have not found a performance benchmark for it, have you? It will likely increase memory usage but improve speed for AOT builds. (though most likely these effects are negligible).
+
+### Resources & licenses
+- Digital-7 font used for countdown was taken from https://www.dafont.com/digital-7.font - free for personal use
+
 ### Objective
 
 Your assignment is to create an app showcasing and notifying visitors about

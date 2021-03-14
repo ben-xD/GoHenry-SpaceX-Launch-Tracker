@@ -1,3 +1,5 @@
+import 'package:quiver/core.dart';
+
 class LaunchMission {
   final String flightNumber;
   final String name;
@@ -17,6 +19,16 @@ class LaunchMission {
         Map<String, String?>.from(json["links"]["patch"])
     );
   }
+
+  @override
+  bool operator ==(Object other) {
+    return (other is LaunchMission)
+      && flightNumber == other.flightNumber;
+  }
+
+  @override
+  int get hashCode => hash2(flightNumber, name);
+
 }
 
 enum DatePrecision {
@@ -46,6 +58,6 @@ extension DatePrecisionExtension on DatePrecision {
         return DatePrecision.hour;
       default:
         return DatePrecision.unknown;
-    };
+    }
   }
 }

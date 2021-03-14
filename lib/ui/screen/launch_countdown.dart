@@ -2,35 +2,18 @@ import 'dart:async';
 
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:space_time/model/launch_mission.dart';
+import 'package:space_time/util/hook_infinite_timer.dart';
 
-class LaunchCountdown extends StatefulWidget {
+class LaunchCountdown extends HookWidget {
   final LaunchMission launchMission;
 
   LaunchCountdown(this.launchMission);
 
-  @override
-  State<StatefulWidget> createState() => _LaunchCountdownState();
-}
+  Widget getCountdown(BuildContext context, Duration timeDifference, Color color) {
+    useInfiniteTimer(context);
 
-class _LaunchCountdownState extends State<LaunchCountdown> {
-  Timer? updateEverySecond;
-
-  @override
-  void initState() {
-    updateEverySecond = Timer.periodic(Duration(seconds: 1), (timer) {
-      setState(() {});
-    });
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    updateEverySecond?.cancel();
-    super.dispose();
-  }
-
-  Widget getCountdownList(Duration timeDifference, Color color) {
     return OrientationBuilder(builder: (context, orientation) {
       var mainAxis = (orientation == Orientation.landscape)
           ? Axis.horizontal
@@ -95,22 +78,34 @@ class _LaunchCountdownState extends State<LaunchCountdown> {
     );
   }
 
-  Widget _getCountdownColumn({Color color = Colors.black}) {
+  Widget _getCountdownColumn(BuildContext context,
+      {Color color = Colors.black}) {
     var timeDifference =
-        this.widget.launchMission.datetime.difference(DateTime.now());
-    if (this.widget.launchMission.datetime.isAfter(DateTime.now())) {
+    launchMission.datetime.difference(DateTime.now());
+    if (launchMission.datetime.isAfter(DateTime.now())) {
       return SizedBox.expand(
-        child: getCountdownList(timeDifference, color),
+        child: getCountdown(context, timeDifference, color),
       );
     } else {
       return Column(
         children: [
           Spacer(),
-          Text("Uncertain launch time...", style: Theme.of(context).textTheme.headline4,),
+          Text("Uncertain launch time...", style: Theme
+              .of(context)
+              .textTheme
+              .headline4,
+            textAlign: TextAlign.center,
+          ),
           SizedBox(height: 8),
           Text(
-              "It will happen sometime this ${EnumToString.convertToString(this.widget.launchMission.datePrecision, camelCase: true).toLowerCase()}.",
-          style: Theme.of(context).textTheme.bodyText1,),
+            "It will happen sometime this ${EnumToString.convertToString(
+                launchMission.datePrecision, camelCase: true)
+                .toLowerCase()} or has already happened.",
+            textAlign: TextAlign.center,
+            style: Theme
+                .of(context)
+                .textTheme
+                .bodyText1,),
           Spacer(),
         ],
       );
@@ -120,11 +115,11 @@ class _LaunchCountdownState extends State<LaunchCountdown> {
   @override
   Widget build(BuildContext context) {
     return Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [
-            Color.fromARGB(255, 34, 66, 68),
-            Color.fromARGB(255, 55, 65, 69)
-          ])),
-          child: _getCountdownColumn(color: Colors.white));
+        decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [
+              Color.fromARGB(255, 34, 66, 68),
+              Color.fromARGB(255, 55, 65, 69)
+            ])),
+        child: _getCountdownColumn(context, color: Colors.white));
   }
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:intl/intl.dart';
 import 'package:jiffy/jiffy.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:space_time/model/launch_mission.dart';
 
 class LaunchCell extends StatelessWidget {
@@ -12,11 +14,6 @@ class LaunchCell extends StatelessWidget {
   const LaunchCell(this._launchMission, this._didSelect,
       {this.textColor = Colors.white, Key? key})
       : super(key: key);
-
-  // Widget getDate() {
-  //   return Text("${launchMission.datetime.day}/${launchMission.datetime.month}/${launchMission.datetime.year.toString().substring(2)}",
-  //     style: TextStyle(fontSize: 14),);
-  // }
 
   Widget getDate() {
     String text;
@@ -50,42 +47,70 @@ class LaunchCell extends StatelessWidget {
 
     return Text(
       text,
+      textAlign: TextAlign.right,
       style: TextStyle(fontSize: 20, color: textColor),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    var imageUri =
-        _launchMission.imageUris["small"] ?? _launchMission.imageUris["large"];
-    // Old code for showing image. TODO use this in countdown screen
-    // if (imageUri != null) Padding(
-    //   padding: const EdgeInsets.only(right: 16.0),
-    //   child: Image.network(launchMission.imageUris["small"], width: 40,),
-    // ),
-
-    // TODO add a screen when tapped/ navigation
     return InkWell(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(32, 32, 32, 8),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                _launchMission.name,
-                style: Theme.of(context).textTheme.bodyText1
+              Flexible(
+                child: Container(
+                  child: Text(_launchMission.name,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodyText1),
+                ),
               ),
-              // TODO wrap text if too big
-              Spacer(),
-              // TODO change text to human readable
-              getDate(),
-              SizedBox(width: 18),
-              Icon(
-                Icons.arrow_forward_ios_rounded,
-                color: Color.fromRGBO(172, 85, 138, 1),
-              )
+              Row(
+                children: [
+                  SizedBox(width: 18),
+                  getDate(),
+                  SizedBox(width: 18),
+                  Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: Color.fromRGBO(172, 85, 138, 1),
+                  )
+                ],
+              ),
             ],
           ),
         ),
         onTap: () => _didSelect(_launchMission));
+  }
+}
+
+class LaunchCellSkeleton extends HookWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 21),
+      child: Shimmer.fromColors(
+        baseColor: Theme.of(context).primaryColor,
+        highlightColor: Theme.of(context).accentColor,
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              flex: 3,
+              child: Container(
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: Colors.white),
+                height: 32,
+              ),
+            ),
+            SizedBox(width: 20),
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: Colors.white),
+                height: 32,
+              ),
+            ),
+          ],
+        ),),
+    );
   }
 }
