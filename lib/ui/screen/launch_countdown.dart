@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
@@ -72,9 +73,14 @@ class LaunchCountdown extends HookWidget {
   }
 
   Widget getTicker(int number, {Color color = Colors.black}) {
-    return Text(
-      "${number.toString().padLeft(2, '0')}",
-      style: TextStyle(fontSize: 100, fontFamily: "Digital-7", color: color),
+    return Column(
+      children: [
+        Text(
+          "${number.toString().padLeft(2, '0')}",
+          style: TextStyle(fontSize: 100, fontFamily: "Digital-7", color: color),
+        ),
+        if (Platform.isAndroid) SizedBox(height: 16,),
+      ],
     );
   }
 

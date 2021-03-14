@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:space_time/model/launch_mission.dart';
@@ -12,11 +13,18 @@ void main() {
 class MyApp extends HookWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      systemNavigationBarColor: Color.fromRGBO(172, 85, 138, 1),
+    ));
+
     final service = useProvider(launchServiceProvider);
 
     return MaterialApp(
         title: 'Flutter Demo',
+        themeMode: ThemeMode.dark,
         theme: ThemeData(
+          brightness: Brightness.dark,
             primaryColor: Color.fromRGBO(172, 85, 138, 1),
             accentColor: Color.fromRGBO(83, 201, 193, 1),
             fontFamily: 'Roboto',

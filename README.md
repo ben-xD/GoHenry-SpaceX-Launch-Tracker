@@ -2,6 +2,11 @@
 
 SpaceX rocket launch times viewer
 
+### To install
+- Be inside the project directory: `cd project_directory`
+- Android: Plug in a device with debug mode or run emulator, followed by `adb install public/SpaceTime.apk`
+- iOS: Drag `SpaceTime.app` onto the emulator
+
 ### My solution
 - I found that the SpaceX Upcoming Launches API gave launch dates to varying precision (accurate to 1 month, accurate to 1 year, etc), so I handled date precision: some dates are "relative" (e.g. in a day) when they are more precise, but others are months/ years (e.g. May) when they are less precise. 
 - I initially implemented the header (Launch`, `date/ UTC`), but realized the content speaks for itself once the dates are provided in a human friendly format.

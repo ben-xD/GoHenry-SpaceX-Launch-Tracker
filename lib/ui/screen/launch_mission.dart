@@ -1,6 +1,7 @@
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:share/share.dart';
@@ -14,7 +15,7 @@ class LaunchMissionScreen extends HookWidget {
   LaunchMissionScreen(this.launchMission);
 
   void _createShareIntent() {
-    Share.share("SpaceX's ${launchMission.name} launches at ${launchMission.datetime}, accurate to ${EnumToString.convertToString(launchMission.datePrecision, camelCase: true).toLowerCase()}");
+    Share.share("SpaceX's ${launchMission.name} launches at ${launchMission.datetime}, accurate to a ${EnumToString.convertToString(launchMission.datePrecision, camelCase: true).toLowerCase()}");
   }
 
   Widget star(AsyncSnapshot<Set<LaunchMission>> snapshot, LaunchService service) {
@@ -58,7 +59,7 @@ class LaunchMissionScreen extends HookWidget {
             )
           ],
         ),
-        brightness: Brightness.dark,
+        // brightness: Brightness.dark,
         flexibleSpace: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(colors: [

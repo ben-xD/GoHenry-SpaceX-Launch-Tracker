@@ -88,9 +88,9 @@ class _UpcomingLaunchesState extends State<UpcomingLaunches> {
 
   AppBar buildAppBar(LaunchService service) {
     return AppBar(
+      brightness: Brightness.dark,
       actions: [buildFavoritesIcon(service)],
       backwardsCompatibility: false,
-      systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.white),
       flexibleSpace: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(colors: [
