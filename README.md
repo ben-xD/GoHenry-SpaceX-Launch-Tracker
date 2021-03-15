@@ -34,6 +34,3 @@ See `/images/ios` and `images/android` for more images.
 
 ### Resources & licenses
 - Digital-7 font used for countdown was taken from https://www.dafont.com/digital-7.font - free for personal use
-
-### Oops
-There are no tests. I got too engrossed in trying out different flutter features. Perhaps my private repo https://github.com/ben-xD/SpaceTime will have the tests? :sparkles: :poop:
