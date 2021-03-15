@@ -5,7 +5,7 @@ SpaceX rocket launch times viewer by Ben Butterworth. Done in 2 days: 14th and 1
 ### To install
 - I did not commit build files to the git repo. You can download the repo which contains **pre-built files (APK for Android/ .app for iOS)** from [here](https://drive.google.com/file/d/1x15vq25Dxg9EmJ_MVcZR34RdHKh4GJM1/view?usp=sharing).
 - Android: `cd space_time`, Plug in a device with debug mode or run emulator, followed by `adb install public/SpaceTime.apk`
-- iOS: Drag `public/SpaceTime.app` onto an emulator
+- iOS: Drag `public/SpaceTime.app` onto an iOS simulator
 - Or, just **build and run it**.
 
 ### My solution
