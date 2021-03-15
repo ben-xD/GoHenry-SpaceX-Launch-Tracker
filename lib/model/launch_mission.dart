@@ -1,6 +1,8 @@
-import 'package:quiver/core.dart';
 
-class LaunchMission {
+
+import 'package:equatable/equatable.dart';
+
+class LaunchMission with EquatableMixin {
   final String flightNumber;
   final String name;
   final DateTime datetime;
@@ -21,14 +23,17 @@ class LaunchMission {
   }
 
   @override
-  bool operator ==(Object other) {
-    return (other is LaunchMission)
-      && flightNumber == other.flightNumber;
-  }
+  List<Object> get props => [flightNumber, name, datetime, datePrecision, imageUris];
 
-  @override
-  int get hashCode => hash2(flightNumber, name);
-
+  // Old version
+  // @override
+  // bool operator ==(Object other) {
+  //   return (other is LaunchMission)
+  //     && flightNumber == other.flightNumber;
+  // }
+  //
+  // @override
+  // int get hashCode => hash2(flightNumber, name);
 }
 
 enum DatePrecision {
