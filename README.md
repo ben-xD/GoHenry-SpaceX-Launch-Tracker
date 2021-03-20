@@ -9,11 +9,11 @@ SpaceX rocket launch times viewer by Ben Butterworth. Done in 2 days: 14th and 1
 
 ### Word of warning
 
-They've shown that they want to see very strong *"separation of concerns"*, e.g. 
+The GoHenry feedback given to me said they want to see very strong *"separation of concerns"*, e.g. 
 
 - separate models separate from DTO
-- Repository classes, not just Service classes
-- If you using Navigator 2.0, refactor that into its own Widget.
+- Repository classes, not just Service classes, and separate shared preferences access from network requests. (They prefer small classes/ shallow implementations)
+- If you using Navigator 2.0, refactor that into its own Widget instead of putting in `UpcomingLaunches` like I did. 
 
 That means the project would be highly fragmented, which might be uncomfortable for some people.
 
